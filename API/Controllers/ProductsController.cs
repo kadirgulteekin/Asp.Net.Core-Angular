@@ -8,9 +8,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class ProductsController : Controller
+    
+    public class ProductsController : BaseApiController
     {
         //private readonly StoreContext _context;
 
@@ -37,10 +36,7 @@ namespace API.Controllers
 
 
 
-        public IActionResult Index()
-        {
-            return View();
-        }
+     
         [HttpGet]
         public async Task<ActionResult<IReadOnlyList<ProductToReturnDto>>> GetProducts()
         {
