@@ -23,6 +23,13 @@ namespace API.Core.SpecificCations
         public int? TypeId { get; set; }
         public string? Sort { get; set; }
 
+        //Encapsulation
+        private string? _search;
+        public string Search {
+            get { return _search; }
+            set { _search = value.ToLower(); } }
+
+
 
     }
 }
