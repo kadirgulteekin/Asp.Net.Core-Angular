@@ -3,12 +3,13 @@ using API.Core.DbModels;
 using API.Core.Interface;
 using API.Core.SpecificCations;
 using API.Dtos;
+using API.Helpers;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
 {
-    
+
     public class ProductsController : BaseApiController
     {
         //private readonly StoreContext _context;
@@ -36,25 +37,21 @@ namespace API.Controllers
 
 
 
-     
-        [HttpGet]
-        public async Task<ActionResult<IReadOnlyList<ProductToReturnDto>>> GetProducts()
-        {
-            var spec =new ProductWithProductTypeAndBrandsSpecifications();
-            var data = await _productRepository.ListAsync(spec);
-            //return Ok(data);
 
-            //return data.Select(pro => new ProductToReturnDto
-            //{
-            //    Id = pro.Id,
-            //    Name = pro.Name,
-            //    Description = pro.Description,
-            //    PictureUrl = pro.PictureUrl,
-            //    Price = pro.Price,
-            //    ProductBrand = pro.ProductBrand != null ? pro.ProductBrand.Name : string.Empty,
-            //    ProductType = pro.ProductType != null ? pro.ProductType.Name : string.Empty
-            //}).ToList();
-            return Ok(_mapper.Map<IReadOnlyList<Product>, IReadOnlyList<ProductToReturnDto>>(data));
+        [HttpGet]
+        public async Task<ActionResult<Pagination<ProductToReturnDto>>> GetProducts([FromQuery] ProductSpecParams productSpecParams)
+        {
+            var spec = new ProductWithProductTypeAndBrandsSpecifications(productSpecParams);
+
+            var countSpec = new ProductWithFiltersForCountSpecifications(productSpecParams);
+
+            var totalItems = await _productRepository.CountAsync(spec);
+
+            var products = await _productRepository.ListAsync(spec);
+
+            var data = _mapper.Map<IReadOnlyList<Product>, IReadOnlyList<ProductToReturnDto>>(products);
+
+            return Ok(new Pagination<ProductToReturnDto>(productSpecParams.PageIndex, productSpecParams.PageIndex, totalItems, data));
 
         }
         [HttpGet("{id}")]

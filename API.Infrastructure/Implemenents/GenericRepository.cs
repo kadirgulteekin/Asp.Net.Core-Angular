@@ -21,6 +21,11 @@ namespace API.Infrastructure.Implemenents
             _context = context;
         }
 
+        public async Task<int> CountAsync(ISpecificCations<T> spec)
+        {
+            return await ApplySpecification(spec).CountAsync();
+        }
+       
         public async Task<T> GetEntityWithSpec(ISpecificCations<T> spec)
         {
             return await ApplySpecification(spec).FirstOrDefaultAsync();
@@ -45,5 +50,7 @@ namespace API.Infrastructure.Implemenents
         {
             return SpecificationEvaluator<T>.GetQuery(_context.Set<T>().AsQueryable(),spec);
         }
+
+       
     }
 }
