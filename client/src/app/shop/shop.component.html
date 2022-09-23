@@ -3,20 +3,33 @@
     <section class="col-3">
 
       <h5 class="text-primary ml-3">Sort</h5>
-      <select class="custom-select mb-3">
-          <option selected>Alphabetical</option>
-          <option>Price:Low to High</option>
-          <option>Price:High to Low</option>
+      <select class="custom-select mb-3" (change)="onSortSelected($any($event.target).value)">
+          <option *ngFor="let sort of sortOption" [value]="sort.value">{{sort.name}}</option>
       </select>
 
       <h5 class="text-primary ml-3">Brand</h5>
         <ul class="list-group my-3">
-          <li class="list-group-item " *ngFor="let brand of brands">{{brand.name}}</li>
+          <li
+          class="list-group-item " *ngFor="let brand of brands"
+
+          [class.active] = "brand.id==this.shopParams.brandId"
+          [value]="brand.id"
+          (click)="onBrandSelected(brand.id)"
+          >
+          {{brand.name}}
+        </li>
 
         </ul>
     <h5 class="text-primary ml-3">Types</h5>
         <ul class="list-group my-3">
-          <li class="list-group-item " *ngFor="let type of types">{{type.name}}</li>
+          <li
+          class="list-group-item " *ngFor="let type of types"
+          [class.active] = "type.id==this.shopParams.typeId"
+          [value]="type.id"
+          (click)="onTypeSelected(type.id)"
+          >
+          {{type.name}}
+        </li>
 
         </ul>
 
@@ -27,7 +40,18 @@
         <div class="d-flex justify-content-between align-items-center pb-2">
 
             <header>
-              <span>Shopwing <strong>10</strong> of <strong>18</strong> result</span>
+              <span *ngIf="this.totalCount && this.totalCount>0">Showing
+                <strong>
+                  {{(this.shopParams.pageNumber-1)*this.shopParams.pageSize+1}}-
+                  {{this.shopParams.pageNumber*this.shopParams.pageSize
+                    >this.totalCount
+                    ? this.totalCount
+                    :this.shopParams.pageNumber * shopParams.pageSize
+                  }}
+                  </strong> of <strong>{{this.totalCount}}</strong> result</span>
+                  <span *ngIf="totalCount==0">
+                    There is <strong>0</strong> result for this filter
+                  </span>
             </header>
             <div class="form-inline mt-2">
               <input class="form-control" style="width: 300px;"placeholder="Search" type="text">
@@ -44,6 +68,17 @@
               <app-product-item [product]="item"></app-product-item>
           </div>
 
+      </div>
+      <div class="d-flex justify-content-center" *ngIf="totalCount>0">
+        <pagination [boundaryLinks]="true"
+          [totalItems]="this.totalCount"
+          (pageChanged)="onPageChange($event)"
+          [itemsPerPage]="this.shopParams.pageSize"
+          previousText="&lsaquo;"
+          nextText="&rsaquo;"
+          firstText="&laquo;"
+          lastText="&raquo;">
+        </pagination>
       </div>
     </section>
   </div>
