@@ -1,7 +1,8 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map, pipe } from 'rxjs';
+import { map, Observable, pipe } from 'rxjs';
 import { IPagination } from '../shared/models/IPagination';
+import { IProduct } from '../shared/models/IProduct';
 import { IProductBrand } from '../shared/models/productBrand';
 import { IProductType } from '../shared/models/productType';
 import { ShopParams } from '../shared/models/shopParams';
@@ -23,6 +24,9 @@ export class ShopService {
     if(shopParams.typeId!=0){
       params=params.append('typeId',shopParams.typeId.toString());
     }
+    if(shopParams.search){
+      params = params.append("search",shopParams.search)
+    }
 
 
       params=params.append("sort",shopParams.sort);
@@ -36,7 +40,9 @@ export class ShopService {
         })
     );
   }
-
+  getProduct(id:number){
+    return this.http.get<IProduct>(this.baseUrl + 'products/'+id)
+  }
   getBrands(){
     return this.http.get<IProductBrand[]>(this.baseUrl+'products/brands');
   }
