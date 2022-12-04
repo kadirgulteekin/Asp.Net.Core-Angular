@@ -8,6 +8,7 @@ import { TestErrorComponent } from './test-error/test-error.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { SectionHeaderComponent } from './section-header/section-header.component';
+import { BreadcrumbComponent, BreadcrumbModule } from 'xng-breadcrumb';
 
 
 
@@ -16,6 +17,7 @@ import { SectionHeaderComponent } from './section-header/section-header.componen
   imports: [
     CommonModule,
     RouterModule,
+    BreadcrumbModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot({
       positionClass:'toastr-bottom-right',
