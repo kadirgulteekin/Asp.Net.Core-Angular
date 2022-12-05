@@ -9,6 +9,8 @@ import { HomeModule } from './home/home.module';
 import { ErrorInterceptor } from './core/interceptors/error.interceptors';
 import { ToastrModule } from 'ngx-toastr';
 import { CoreModule } from './core/core.module';
+import { NgxSpinner, NgxSpinnerModule } from 'ngx-spinner';
+import { LoadingInterceptor } from './core/interceptors/loading.interceptor';
 
 
 
@@ -17,7 +19,8 @@ import { CoreModule } from './core/core.module';
         AppComponent,
     ],
     providers: [
-        { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
+        { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+        { provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true }
     ],
     bootstrap: [AppComponent],
     imports: [
@@ -32,7 +35,8 @@ import { CoreModule } from './core/core.module';
             progressBar: true
         }),
         HomeModule,
-       
+        NgxSpinnerModule
+
     ]
 })
 export class AppModule { }
