@@ -1,3 +1,5 @@
+
+
 .cart-no{
   position: absolute;
   min-height: 25px;
@@ -23,11 +25,14 @@ a.active{
   color: orangered;
 }
 
+
+
 .logo{
   cursor: pointer;
 
+
 }
-/* 
+/*
 .logo:focus{
   outline: none;
 } */
