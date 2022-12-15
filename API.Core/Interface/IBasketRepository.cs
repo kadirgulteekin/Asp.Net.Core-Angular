@@ -10,7 +10,7 @@ namespace API.Core.Interface
     public interface IBasketRepository
     {
         Task<CustomerBasket> GetBasketAsync(string basketId);
-        Task<CustomerBasket> UpdateAsync(CustomerBasket basket);
+        Task<CustomerBasket> UpdateBasketAsync(CustomerBasket basket);
         Task<bool> DeleteBasketAsync(string basketId);
     }
 }

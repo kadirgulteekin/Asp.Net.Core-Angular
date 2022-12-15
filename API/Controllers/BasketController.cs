@@ -25,7 +25,7 @@ namespace API.Controllers
 
         public async Task<ActionResult<CustomerBasket>> UpdateBasket(CustomerBasket basket)
         {
-            var updateBasket = await _basketRepository.UpdateAsync(basket);
+            var updateBasket = await _basketRepository.UpdateBasketAsync(basket);
             return Ok(updateBasket);
         }
 
