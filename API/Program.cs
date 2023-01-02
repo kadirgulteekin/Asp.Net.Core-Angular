@@ -7,7 +7,7 @@ using StackExchange.Redis;
 using Microsoft.Extensions.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
-
+ConfigurationManager configuration = builder.Configuration;
 
 // Add services to the container.
 
@@ -21,32 +21,25 @@ builder.Services.AddSwaggerDocumentation();
 
 builder.Services.AddCors(opt =>
 {
-    opt.AddPolicy("CorsPolicy", policy => 
+    opt.AddPolicy("CorsPolicy", policy =>
     {
         policy.AllowAnyHeader().AllowAnyMethod().WithOrigins("http://localhost:4200");
     });
 });
 
-IConfiguration configuration = builder.Configuration;
-var multiplexer = ConnectionMultiplexer.Connect(configuration.GetConnectionString("Redis"));
-builder.Services.AddSingleton<IConnectionMultiplexer>(multiplexer);
+var redis = ConnectionMultiplexer.Connect(configuration.GetConnectionString("Redis"));
+
+builder.Services.AddScoped(s => redis.GetDatabase());
 
 
-//var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
-//builder.Services.AddDbContext<StoreContext>(options => options.UseSqlServer(connectionString));
+
 
 builder.Services.AddDbContext<StoreContext>(options =>
          options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
-//if (app.Environment.IsDevelopment())
-//{
-//    app.UseSwagger();
-//    app.UseSwaggerUI();
-//    app.UseDeveloperExceptionPage();
-//}
+
 
 app.UseMiddleware<ExceptionMiddleware>();
 

@@ -31,6 +31,7 @@ export class BasketService {
   setBasket(basket:IBasket){
     return this.http.post<IBasket>(this.basketUrl + 'basket',basket).subscribe((response : IBasket)=>{
       this.basketSource.next(response);
+      console.log(response);
     },error =>{
       console.log(error);
     });
@@ -51,9 +52,10 @@ export class BasketService {
 
    private addOrUpdateItem(items: IBasketItem[], itemToAdd: IBasketItem, quantity: number)
    : IBasketItem[]{
+      console.log('addOrUpdateItem =>',items)
       const index = items.findIndex(i=>i.id===itemToAdd.id);
       if(index===-1){
-        items.push(itemToAdd)
+        items.push(itemToAdd) 
       }
       else{
         items[index].quantity+=quantity;
@@ -62,7 +64,7 @@ export class BasketService {
 
   }
 
-  
+
   private createBasket(): IBasket {
     const basket = new Basket();
     localStorage.setItem('basket_id',basket.id);

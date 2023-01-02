@@ -1,5 +1,7 @@
 ﻿using API.Core.DbModels;
 using API.Core.Interface;
+using API.Dtos;
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
@@ -7,11 +9,13 @@ namespace API.Controllers
     public class BasketController : BaseApiController
     {
         private readonly IBasketRepository _basketRepository;
+        private readonly IMapper _mapper;
 
         //Injection Process
-        public BasketController(IBasketRepository basketRepository)
+        public BasketController(IBasketRepository basketRepository,IMapper mapper)
         {
             _basketRepository = basketRepository;
+            _mapper = mapper;
         }
 
         [HttpGet]
@@ -25,6 +29,12 @@ namespace API.Controllers
 
         public async Task<ActionResult<CustomerBasket>> UpdateBasket(CustomerBasket basket)
         {
+            if(basket.Id == null)
+            {
+                var newGuideValue = Guid.NewGuid().ToString();
+                basket.Id = newGuideValue.ToString();
+            }
+           
             var updateBasket = await _basketRepository.UpdateBasketAsync(basket);
             return Ok(updateBasket);
         }
