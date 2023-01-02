@@ -55,7 +55,7 @@ export class BasketService {
       console.log('addOrUpdateItem =>',items)
       const index = items.findIndex(i=>i.id===itemToAdd.id);
       if(index===-1){
-        items.push(itemToAdd) 
+        items.push(itemToAdd)
       }
       else{
         items[index].quantity+=quantity;
