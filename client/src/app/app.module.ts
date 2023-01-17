@@ -11,6 +11,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { CoreModule } from './core/core.module';
 import { NgxSpinner, NgxSpinnerModule } from 'ngx-spinner';
 import { LoadingInterceptor } from './core/interceptors/loading.interceptor';
+import { BasketModule } from './basket/basket.module';
 
 
 
@@ -35,7 +36,8 @@ import { LoadingInterceptor } from './core/interceptors/loading.interceptor';
             progressBar: true
         }),
         HomeModule,
-        NgxSpinnerModule
+        NgxSpinnerModule,
+        BasketModule
 
     ]
 })

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { BasketService } from './basket/basket.service';
 
 
 
@@ -11,7 +12,7 @@ export class AppComponent implements OnInit{
   title = 'E-Ticaret';
 
 
-  constructor(){
+  constructor(private basketService:BasketService){
 
   }
 
@@ -21,5 +22,13 @@ export class AppComponent implements OnInit{
     // },error=>{
     //   console.log(error);
     // });
+    const basketId=localStorage.getItem('basket_id');
+    if(basketId){
+      this.basketService.getBasket(basketId).subscribe(()=>{
+        console.log("initiliaze basket");
+      },error =>{
+        console.log(error);
+      })
+    }
   }
 }

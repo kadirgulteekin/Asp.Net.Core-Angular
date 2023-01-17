@@ -9,6 +9,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { SectionHeaderComponent } from './section-header/section-header.component';
 import { BreadcrumbComponent, BreadcrumbModule } from 'xng-breadcrumb';
+import { BasketComponent } from '../basket/basket.component';
 
 
 
