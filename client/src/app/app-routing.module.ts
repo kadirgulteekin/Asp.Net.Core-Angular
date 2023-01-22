@@ -15,8 +15,9 @@ const routes: Routes = [
   {path:"not-found",component:NotFoundComponent,data:{breadcrumb:'Not Found'}},
   {path:"shop",component:ShopComponent,data:{breadcrumb:'shop'}},
   {path:"shop/:id",component:ProductDetailsComponent,data:{breadcrumb:{alias:'shopDetail'}}},
-  {path:"basket",component:BasketComponent,data:{breadcrumb:'basket'}},
-  {path:"**",redirectTo:"",pathMatch:'full'}
+  //  {path:"basket",component:BasketComponent,data:{breadcrumb:'basket'}},
+  {path:"basket",loadChildren:()=>import('./basket/basket.module').then(mod=>mod.BasketModule),data:{breadcrumb:'Basket'}},
+  {path:"checkout",loadChildren:()=>import('./checkout/checkout.module').then(mod=>mod.CheckoutModule),data:{breadcrumb:'Checkout'}},
 ];
 
 @NgModule({
