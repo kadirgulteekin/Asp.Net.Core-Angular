@@ -10,7 +10,7 @@ namespace API.Dtos
         [EmailAddress]
         public string Email { get; set; }
         [Required]
-        [RegularExpression(@"(?= ^.{6, 10}$)(?=.*\d)(?=.*[a - z])(?=.*[A - Z])(?=.*[!@#$%^&amp;*()_+}{&quot;:;'?/&gt;.&lt;,])(?!.*\s).*$")]
+        [RegularExpression(@"(?= ^.{6, 10}$)(?=.*\d)(?=.*[a - z])(?=.*[A - Z])(?=.*[!@#$%^&amp;*()_+}{&quot;:;'?/&gt;.&lt;,])(?!.*\s).*$",ErrorMessage ="Şifreniz bir büyük karekter bir küçük karakter içermelidir.")]
         public string Password { get; set; }
     }
 }
