@@ -2,8 +2,12 @@
 using API.Core.Interface;
 using API.Dtos;
 using API.Errors;
+using API.Extensions;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System.Linq;
+using System.Security.Claims;
 
 namespace API.Controllers
 {
@@ -62,6 +66,36 @@ namespace API.Controllers
                 Token = _tokenService.CreateToken(user),
                 Email = registerDto.Email,
             };
+        }
+
+
+        [Authorize]
+        [HttpGet]
+        public async Task<ActionResult<UserDto>> GetCurrentUser()
+        {
+            var user = await _userManager.FindByUserByClaimsPrencipleWithAddressAsync(HttpContext.User);
+            return new UserDto
+            {
+                DisplayName = user.DisplayName,
+                Token = _tokenService.CreateToken(user),
+                Email = user.Email
+            };
+        }
+
+        [HttpGet("emailexist")]
+        public async Task<ActionResult<bool>> CheckEmailExistAsync([FromQuery] string email)
+        {
+            return await _userManager.FindByEmailAsync(email) != null;
+        }
+
+        [Authorize]
+        [HttpGet("address")]
+
+        public async Task<ActionResult<Address>> GetUserAddress()
+        {
+            var user = await _userManager.FindByUserByClaimsPrencipleWithAddressAsync(HttpContext.User);
+
+            return user.Address;
         }
     }
 }
