@@ -10,6 +10,7 @@ namespace API.Controllers
     {
         private readonly IBasketRepository _basketRepository;
         private readonly IMapper _mapper;
+        
 
         //Injection Process
         public BasketController(IBasketRepository basketRepository,IMapper mapper)
@@ -27,15 +28,15 @@ namespace API.Controllers
 
         [HttpPost]
 
-        public async Task<ActionResult<CustomerBasket>> UpdateBasket(CustomerBasket basket)
+        public async Task<ActionResult<CustomerBasket>> UpdateBasket(CustomerBasketDto basket)
         {
             if(basket.Id == null)
             {
                 var newGuideValue = Guid.NewGuid().ToString();
                 basket.Id = newGuideValue.ToString();
             }
-           
-            var updateBasket = await _basketRepository.UpdateBasketAsync(basket);
+            var customerBasket = _mapper.Map<CustomerBasketDto, CustomerBasket>(basket);
+            var updateBasket = await _basketRepository.UpdateBasketAsync(customerBasket);
             return Ok(updateBasket);
         }
 
