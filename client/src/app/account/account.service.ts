@@ -33,6 +33,7 @@ export class AccountService {
       map((user:IUser)=>{
         if(user){
           localStorage.setItem('token',user.token)
+          //localstorage is a temporary logging domain.
         }
       })
     );
