@@ -38,7 +38,9 @@ import { BasketModule } from './basket/basket.module';
         }),
         HomeModule,
         NgxSpinnerModule,
-        BasketModule
+        BasketModule,
+
+
 
     ]
 })

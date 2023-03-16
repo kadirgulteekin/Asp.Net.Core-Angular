@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BasketService } from './basket/basket.service';
+import { SlideInterface } from './shared/models/slide.interface';
 
 
 

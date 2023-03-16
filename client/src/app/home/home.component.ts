@@ -1,4 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { SlideInterface } from '../shared/models/slide.interface';
+
 
 interface carouselImage {
   imageSrc:string;
@@ -13,14 +15,16 @@ interface carouselImage {
 })
 export class HomeComponent implements OnInit {
 
-  // @Input() images: carouselImage[] = []
-  // @Input() indicators=true;
 
+  @Input() slides: SlideInterface[] = [];
   selectedIndex = 0;
+
 
   constructor() { }
 
   ngOnInit(): void {
+
   }
+
 
 }
