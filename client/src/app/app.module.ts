@@ -31,6 +31,7 @@ import { BasketModule } from './basket/basket.module';
         HttpClientModule,
         CoreModule,
         ShopModule,
+        HomeModule,
         ToastrModule.forRoot({
             closeButton: true,
             progressBar: true
