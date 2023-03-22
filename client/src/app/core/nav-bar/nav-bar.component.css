@@ -1,4 +1,6 @@
-
+.*{
+  cursor: pointer;
+}
 
 .cart-no{
   position: absolute;
@@ -29,10 +31,11 @@ a.active{
 
 .logo{
   cursor: pointer;
+  pointer-events: auto;
 
 
 }
-/*
+
 .logo:focus{
   outline: none;
-} */
+}

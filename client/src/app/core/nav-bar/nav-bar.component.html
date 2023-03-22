@@ -12,11 +12,19 @@
   </nav>
   <div class="d-flex align-items-center">
     <a routerLink="/basket" class="position-relative">
-      <i class="fa fa-shopping-cart fa-2x mr-5 text-dark" style="margin-right:43px;margin-top:1px;;"></i>
+      <i class="fa fa-shopping-cart fa-2x mr-5 text-dark" style="margin-right:43px;margin-top:1px;"></i>
       <div *ngIf="(basket$ | async) as basket" class="cart-no">{{basket.items.length}}</div>
 
     </a>
+
+
+   <ng-container *ngIf="(currentUser$ | async) == null" >
     <a routerLink="/account/login" class="btn btn-outline-secondary mr-2" style="margin-right: 5px;">Login</a>
     <a routerLink="/account/register" class="btn btn-outline-secondary mr-3">Sign Up</a>
+   </ng-container>
+
+   <ng-container  *ngIf="currentUser$ | async">
+    <a href="#">Welcome {{(currentUser$ | async)?.displayName}}</a>
+   </ng-container>
   </div>
 </div>
