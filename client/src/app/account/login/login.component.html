@@ -32,6 +32,12 @@
               <input formControlName="email" type="email"  id="inputEmail" class="form-control form-control-lg"
                 placeholder="Enter a valid email address" />
               <!-- <label class="form-label" for="form3Example3">Email address</label> -->
+              <span class="text-danger" *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched && loginForm.get('email')?.errors!['required']">
+                Email addres is required
+              </span>
+              <span class="text-danger" *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched && loginForm.get('email')?.errors!['pattern']">
+                Email adress is not valid
+              </span>
             </div>
 
             <!-- Password input -->
@@ -41,6 +47,10 @@
                 placeholder="Enter password" />
 
               <!-- <label class="form-label" for="form3Example4">Password</label> -->
+              <b></b>
+              <span class="text-danger" *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched && loginForm.get('password')?.errors!['required']">
+                Password addres is required
+              </span>
             </div>
 
             <div class="d-flex justify-content-between align-items-center">
@@ -55,7 +65,7 @@
             </div>
 
             <div class="text-center text-lg-start mt-4 pt-2">
-              <button  type="button" class="btn btn-primary btn-lg"
+              <button  [disabled]="loginForm.invalid" type="button" class="btn btn-primary btn-lg"
                 style="padding-left: 2.5rem; padding-right: 2.5rem;" type="submit">Login</button>
               <p class="small fw-bold mt-2 pt-1 mb-0">Don't have an account? <a href="#!"
                   class="link-danger">Register</a></p>

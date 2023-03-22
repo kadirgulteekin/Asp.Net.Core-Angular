@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AccountService } from './account/account.service';
 import { BasketService } from './basket/basket.service';
 import { SlideInterface } from './shared/models/slide.interface';
 
@@ -14,23 +15,37 @@ export class AppComponent implements OnInit{
 
 
 
-  constructor(private basketService:BasketService){
+  constructor(private basketService:BasketService,private accountService:AccountService){
 
   }
 
   ngOnInit(): void {
-    // this.http.get<IPagination>('https://localhost:44376/api/Products').subscribe((response:IPagination)=>{
-    //   this.products=response.data;
-    // },error=>{
-    //   console.log(error);
-    // });
-    const basketId=localStorage.getItem('basket_id');
-    if(basketId){
-      this.basketService.getBasket(basketId).subscribe(()=>{
-        console.log("initiliaze basket");
-      },error =>{
-        console.log(error);
-      })
+    this.loadBasket();
+
+  }
+
+  loadCurrentUser(){
+    const token = localStorage.getItem('token');
+    if(token){
+      this.accountService.loadCurrentUser(token).subscribe(()=>{
+        console.log('Loaded User');
+      },
+      (error) => {
+        console.log(error)
+      }
+      )
     }
+  }
+
+  loadBasket(){
+      // });
+      const basketId=localStorage.getItem('basket_id');
+      if(basketId){
+        this.basketService.getBasket(basketId).subscribe(()=>{
+          console.log("initiliaze basket");
+        },error =>{
+          console.log(error);
+        })
+      }
   }
 }
