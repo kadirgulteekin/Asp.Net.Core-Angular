@@ -12,6 +12,8 @@ import { CoreModule } from './core/core.module';
 import { NgxSpinner, NgxSpinnerModule } from 'ngx-spinner';
 import { LoadingInterceptor } from './core/interceptors/loading.interceptor';
 import { BasketModule } from './basket/basket.module';
+import { CheckoutModule } from './checkout/checkout.module';
+import { AuthGuard } from './core/guards/auth.guard';
 
 
 
@@ -21,7 +23,8 @@ import { BasketModule } from './basket/basket.module';
     ],
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
-        { provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true }
+        { provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true },
+        AuthGuard
     ],
     bootstrap: [AppComponent],
     imports: [
@@ -39,6 +42,8 @@ import { BasketModule } from './basket/basket.module';
         HomeModule,
         NgxSpinnerModule,
         BasketModule,
+        CheckoutModule,
+      
 
 
 
