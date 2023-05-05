@@ -25,7 +25,12 @@ namespace API.Infrastructure.Implemenents
         {
             return await ApplySpecification(spec).CountAsync();
         }
-       
+
+        public Task<T> GetByIdAsync(int id)
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task<T> GetEntityWithSpec(ISpecificCations<T> spec)
         {
             return await ApplySpecification(spec).FirstOrDefaultAsync();
@@ -50,7 +55,21 @@ namespace API.Infrastructure.Implemenents
         {
             return SpecificationEvaluator<T>.GetQuery(_context.Set<T>().AsQueryable(),spec);
         }
+        public void Add(T entity)
+        {
+            _context.Set<T>().Add(entity);
+        }
+        public void Delete(T entity)
+        {
+            _context.Set<T>().Remove(entity);
+        }
+        public void Update(T entity)
+        {
+            _context.Set<T>().Attach(entity);
+            _context.Entry(entity).State = EntityState.Modified;
+        }
 
-       
+
+
     }
 }
