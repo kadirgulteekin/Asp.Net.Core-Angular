@@ -6,8 +6,14 @@ using System.Threading.Tasks;
 
 namespace API.Core.DbModels.OrderAggregate
 {
+   
     public class Order : BaseEntity
     {
+
+        public Order()
+        {
+
+        }
         public Order(string buyerEmail, Address shiptToAddress, DeliveryMethod deliveryMethod,
             IReadOnlyList<OrderItem> orderItems, decimal subTotal)
         {
