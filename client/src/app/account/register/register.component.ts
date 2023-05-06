@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { AccountService } from '../account.service';
 import { Router } from '@angular/router';
 import { AsyncValidatorFn, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { error } from 'console';
 import { map, of, switchMap, timer } from 'rxjs';
 
 @Component({

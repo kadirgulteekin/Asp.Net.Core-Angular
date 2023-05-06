@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { CheckoutComponent } from './checkout.component';
 import { RouterModule, Routes } from '@angular/router';
 import { CheckoutRoutingModule } from './checkout-routing.module';
+import { SharedModule } from '../shared/shared.module';
 
 
 
@@ -11,7 +12,7 @@ import { CheckoutRoutingModule } from './checkout-routing.module';
     CheckoutComponent
   ],
   imports: [
-    CommonModule,CheckoutRoutingModule
+    CommonModule,CheckoutRoutingModule,SharedModule
   ],
 
 })
