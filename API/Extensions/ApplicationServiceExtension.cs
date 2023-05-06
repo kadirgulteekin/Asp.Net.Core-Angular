@@ -1,4 +1,5 @@
 ﻿using API.Core.Interface;
+using API.Infrastructure.Data;
 using API.Infrastructure.Implemenents;
 using API.Infrastructure.Services;
 
@@ -10,7 +11,7 @@ namespace API.Extensions
         {
             services.AddScoped<ITokenService, TokenService>();
             services.AddScoped<IOrderService, OrderService>();
-            services.AddScoped<IUnitOfWork, IUnitOfWork>();
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<IProductRepository, ProductRepository>();
             services.AddScoped<IBasketRepository, BasketRepository>();
             services.AddScoped(typeof(IGenericRepository<>), (typeof(GenericRepository<>)));
