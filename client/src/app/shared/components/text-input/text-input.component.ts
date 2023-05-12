@@ -48,8 +48,8 @@ export class TextInputComponent implements OnInit, ControlValueAccessor {
   registerOnTouched(fn: any): void {
     this.onChange = fn;
   }
-  setDisabledState?(isDisabled: boolean): void {
-    throw new Error('Method not implemented.');
+  setDisabledState(isDisabled: boolean): void {
+    this.input.nativeElement.disabled = isDisabled;
   }
 
 
