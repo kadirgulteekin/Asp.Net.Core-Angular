@@ -26,9 +26,10 @@ namespace API.Infrastructure.Implemenents
             return await ApplySpecification(spec).CountAsync();
         }
 
-        public Task<T> GetByIdAsync(int id)
+        public async Task<T> GetByIdAsync(int id)
         {
-            throw new NotImplementedException();
+               return await _context.Set<T>().FindAsync(id);
+
         }
 
         public async Task<T> GetEntityWithSpec(ISpecificCations<T> spec)
@@ -36,10 +37,10 @@ namespace API.Infrastructure.Implemenents
             return await ApplySpecification(spec).FirstOrDefaultAsync();
         }
 
-        public async Task<T> GeyByIdAsync(int id)
-        {
-            return await _context.Set<T>().FindAsync(id);
-        }
+        //public async Task<T> GeyByIdAsync(int id)
+        //{
+        //    return await _context.Set<T>().FindAsync(id);
+        //}
 
         public async Task<IReadOnlyList<T>> ListAllAsync()
         {

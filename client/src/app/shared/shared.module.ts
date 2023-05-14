@@ -12,6 +12,8 @@ import {CdkStepperModule} from '@angular/cdk/stepper';
 import { StepperComponent } from './components/stepper/stepper.component'
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { BasketSummaryComponent } from './components/basket-summary/basket-summary.component';
+import { RouterModule } from '@angular/router';
 
 
 
@@ -21,7 +23,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     PagerComponent,
     OrderTotalsComponent,
     TextInputComponent,
-    StepperComponent
+    StepperComponent,
+    BasketSummaryComponent
   ],
   imports: [
     CommonModule,
@@ -31,7 +34,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     ReactiveFormsModule,
     CdkStepperModule,
     MatStepperModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    RouterModule
 
   ],
 
@@ -47,7 +51,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
   CdkStepperModule,
   StepperComponent,
   MatStepperModule,
-  MatFormFieldModule
+  MatFormFieldModule,
+  BasketSummaryComponent
 
 
 ]

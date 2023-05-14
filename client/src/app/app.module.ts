@@ -17,6 +17,7 @@ import { AuthGuard } from './core/guards/auth.guard';
 import { BrowserModule } from '@angular/platform-browser';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { JwtInterceptor } from './core/interceptors/jwt.interceptors';
 
 
 
@@ -28,6 +29,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
         { provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true },
+        { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
         AuthGuard
     ],
     bootstrap: [AppComponent],

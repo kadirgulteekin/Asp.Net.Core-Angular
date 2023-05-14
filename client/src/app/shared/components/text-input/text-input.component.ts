@@ -46,7 +46,7 @@ export class TextInputComponent implements OnInit, ControlValueAccessor {
     this.onChange = fn;
   }
   registerOnTouched(fn: any): void {
-    this.onChange = fn;
+    this.onTouched = fn;
   }
   setDisabledState(isDisabled: boolean): void {
     this.input.nativeElement.disabled = isDisabled;

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
 
 @Component({
@@ -17,14 +17,21 @@ export class CheckoutComponent implements OnInit {
   }
 
   createCheckoutForm() {
+    const firstNameValidators = [Validators.required, Validators.minLength(3)];
+    const lastNameValidators = [Validators.required, Validators.minLength(3)];
+    const streetValidators = [Validators.required, Validators.minLength(8)];
+    const cityValidators = [Validators.required, Validators.minLength(3)];
+    const stateValidators = [Validators.required, Validators.minLength(3)];
+    const zipCodeValidators = [Validators.required, Validators.minLength(3)];
+
     this.checkoutForm = this.fb.group({
       addressForm: this.fb.group({
-        firstName: [null, Validators.required],
-        lastName: [null, Validators.required],
-        street: [null, Validators.required],
-        city: [null, Validators.required],
-        state: [null, Validators.required],
-        zipCode: [null, Validators.required],
+        firstName: [null, firstNameValidators],
+        lastName: [null, lastNameValidators],
+        street: [null, streetValidators],
+        city: [null, cityValidators],
+        state: [null, stateValidators],
+        zipCode: [null, zipCodeValidators],
       }),
       deliveryForm : this.fb.group({
         deliveryMethod: [null, Validators.required],

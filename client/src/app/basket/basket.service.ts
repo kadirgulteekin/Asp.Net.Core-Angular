@@ -5,6 +5,7 @@ import { environment } from 'src/environments/environment';
 import { Basket, IBasket, IBasketItem, IBasketTotals } from '../shared/models/basket';
 import { map } from 'rxjs/operators';
 import { IProduct } from '../shared/models/IProduct';
+import { ToastrService } from 'ngx-toastr';
 
 @Injectable({
   providedIn: 'root'
@@ -23,7 +24,7 @@ export class BasketService {
   private basketTotalSource=new BehaviorSubject<IBasketTotals|null>(null);
   basketTotal$ = this.basketTotalSource.asObservable();
 
-  constructor(private http:HttpClient) { }
+  constructor(private http:HttpClient,private toastrService:ToastrService) { }
 
   getBasket(id : string){
     return this.http.get<IBasket>(this.basketUrl + 'basket?id='+id)
@@ -33,7 +34,9 @@ export class BasketService {
          this.calculateTotals();
         })
       );
+
   }
+
 
 
   setBasket(basket:IBasket){
@@ -74,6 +77,8 @@ export class BasketService {
 
 
 
+
+
   removeItemFromBasket(item: IBasketItem) {
     const basket = this.getCurrentBasketValue();
     if(basket !=null)
@@ -85,6 +90,7 @@ export class BasketService {
         this.deleteBasket(basket);
       }
     }
+
     }
 
 
@@ -118,7 +124,7 @@ export class BasketService {
 
    if(basket!=null){
     const foundItemIndex=basket?.items.findIndex(x=>x.id===item.id); //Which product should be increased?
-    if(basket.items[foundItemIndex].quantity>0){
+    if(basket.items[foundItemIndex].quantity>1){
       basket.items[foundItemIndex].quantity--;
     }else{
       this.removeItemFromBasket(item);
@@ -126,6 +132,7 @@ export class BasketService {
     this.setBasket(basket);
 
    }
+
   }
 
 
