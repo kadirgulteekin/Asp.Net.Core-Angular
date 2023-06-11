@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { AccountService } from '../account/account.service';
+
 
 
 @Component({
@@ -10,10 +12,11 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 export class CheckoutComponent implements OnInit {
   checkoutForm: FormGroup;
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder,private accountService:AccountService) {}
 
   ngOnInit(): void {
     this.createCheckoutForm();
+    this.getAddressForValues();
   }
 
   createCheckoutForm() {
@@ -40,5 +43,17 @@ export class CheckoutComponent implements OnInit {
         nameOnCard: [null, Validators.required]
       })
     });
+  }
+
+
+  getAddressForValues(){
+    this.accountService.getUserAddress().subscribe(address=>{
+      if(address){
+        console.log("address" , address)
+        this.checkoutForm.get('addressForm').patchValue(address);
+      }
+    },error => {
+      console.log(error);
+    })
   }
 }

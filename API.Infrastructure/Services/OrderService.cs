@@ -15,11 +15,13 @@ namespace API.Infrastructure.Services
 
         private readonly IBasketRepository _basketRepo;
         private readonly IUnitOfWork _unitOfWork;
+      
 
         public OrderService(IBasketRepository basketRepo, IUnitOfWork unitOfWork)
         {
             _basketRepo = basketRepo;
             _unitOfWork = unitOfWork;
+           
         }
 
         public async Task<Order> CreateOrderAsync(string buyerEmail, int deliveryMethodId, string basketId, Address shippingAddress)
@@ -50,7 +52,8 @@ namespace API.Infrastructure.Services
             return order;
         }
 
-        public async Task<IReadOnlyList<DeliveryMethod>> GetDeliveryMethodsAsync()
+
+        public async Task<IReadOnlyList<DeliveryMethod>> GetDeliveryMethodAsync()
         {
             return await _unitOfWork.Repository<DeliveryMethod>().ListAllAsync();
         }
@@ -61,7 +64,7 @@ namespace API.Infrastructure.Services
 
             return await _unitOfWork.Repository<Order>().GetEntityWithSpec(spec);
         }
-
+         
         public async Task<IReadOnlyList<Order>> GetOrderForUserAsync(string buyerEmail)
         {
             var spec = new OrdersWithItemsAndOrderingSpefication(buyerEmail);

@@ -13,7 +13,8 @@ var builder = WebApplication.CreateBuilder(args);
 
 //var provider = builder.Services.BuildServiceProvider();
 //var configuration = provider.GetRequiredService<IConfiguration>();
-ConfigurationManager configuration = builder.Configuration;
+
+IConfiguration configuration = builder.Configuration;
 
 // Add services to the container.
 
@@ -43,7 +44,6 @@ builder.Services.AddIdentityServices(configuration);
 
 
 builder.Services.AddSwaggerDocumentation();
-
 builder.Services.AddCors(opt =>
 {
     opt.AddPolicy("CorsPolicy", policy =>
@@ -51,6 +51,7 @@ builder.Services.AddCors(opt =>
         policy.AllowAnyHeader().AllowAnyMethod().WithOrigins("http://localhost:4200");
     });
 });
+
 
 var app = builder.Build();
 
@@ -61,6 +62,8 @@ app.UseStatusCodePagesWithReExecute("/error/{0}");
 app.UseStaticFiles();
 
 app.UseHttpsRedirection();
+
+app.UseRouting();
 
 app.UseCors("CorsPolicy");
 

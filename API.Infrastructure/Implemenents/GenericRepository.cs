@@ -16,6 +16,7 @@ namespace API.Infrastructure.Implemenents
     {
         private readonly StoreContext _context;
 
+
         public GenericRepository(StoreContext context)
         {
             _context = context;
@@ -37,11 +38,7 @@ namespace API.Infrastructure.Implemenents
             return await ApplySpecification(spec).FirstOrDefaultAsync();
         }
 
-        //public async Task<T> GeyByIdAsync(int id)
-        //{
-        //    return await _context.Set<T>().FindAsync(id);
-        //}
-
+    
         public async Task<IReadOnlyList<T>> ListAllAsync()
         {
             return await _context.Set<T>().ToListAsync();

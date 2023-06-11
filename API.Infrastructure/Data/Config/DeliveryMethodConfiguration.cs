@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace API.Infrastructure.Data.Config
 {
-    public class DeliveryMethodConfiguration : IEntityTypeConfiguration<OrderItem>
+    public class DeliveryMethodConfiguration : IEntityTypeConfiguration<DeliveryMethod>
     {
-        public void Configure(EntityTypeBuilder<OrderItem> builder)
+        public void Configure(EntityTypeBuilder<DeliveryMethod> builder)
         {
             builder.Property(i => i.Price)
                 .HasColumnType("decimal(18,2)");

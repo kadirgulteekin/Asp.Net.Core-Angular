@@ -9,11 +9,10 @@ import { IDeliveryMethod } from 'src/app/shared/models/deliveryMethod';
   styleUrls: ['./checkout-delivery.component.css'],
 })
 export class CheckoutDeliveryComponent {
-
+  @Input() checkoutForm: FormGroup;
   deliveryMethods: IDeliveryMethod[];
 
-  @Input() checkoutForm: FormGroup;
-
+ 
   constructor(private checkoutService: CheckoutService) {}
 
   ngOnInit(): void {

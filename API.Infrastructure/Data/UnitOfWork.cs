@@ -1,6 +1,7 @@
 ﻿using API.Core.DbModels;
 using API.Core.Interface;
 using API.Infrastructure.DataContext;
+using API.Infrastructure.Implemenents;
 using System.Collections;
 
 namespace API.Infrastructure.Data
@@ -13,7 +14,7 @@ namespace API.Infrastructure.Data
         public UnitOfWork(StoreContext context)
         {
             _context = context;
-
+       
         }
         public async Task<int> Complete()
         {
@@ -31,7 +32,7 @@ namespace API.Infrastructure.Data
             var type = typeof(TEntity).Name;
             if (!_repositories.ContainsKey(type))
             {
-                var repositoryType = typeof(IGenericRepository<>);
+                var repositoryType = typeof(GenericRepository<>);
                 var repositoryInstance = Activator.CreateInstance(repositoryType.MakeGenericType(typeof(TEntity)), _context);
                 _repositories.Add(type, repositoryInstance);
             }
